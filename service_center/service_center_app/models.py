@@ -27,25 +27,20 @@ class Client(models.Model):
             raise ValidationError("Номер телефона должен быть в формате +375 (XX) XXX-XX-XX.")
 
     def save(self, *args, **kwargs):
-        if self.pk:  # Обновление существующего клиента
-            logger.info(f'Updated client: {self.name}')
-        else:  # Создание нового клиента
-            logger.info(f'Created new client: {self.name}')
-        super().save(*args, **kwargs)
-
-        self.phone = self.format_phone(self.phone)
-        self.clean()
+        self.clean()  # Вызов проверки данных
+        self.phone = self.format_phone(self.phone)  # Форматируем номер телефона
+        if self.pk is None:  # Если объект новый (создается)
+            logger.info(f'Created new client: {self.first_name} {self.last_name}')  # Используем first_name и last_name
         super(Client, self).save(*args, **kwargs)
 
     def format_phone(self, phone):
         cleaned_phone = re.sub(r'[^\d+]', '', phone)
-
         if len(cleaned_phone) == 12:  # +375291234567 -> +375 (29) 123-45-67
             return f"+375 (29) {cleaned_phone[4:7]}-{cleaned_phone[7:9]}-{cleaned_phone[9:11]}"
         return phone.strip()
 
     def delete(self, *args, **kwargs):
-        logger.warning(f'Deleted client: {self.name}')
+        logger.warning(f'Deleted client: {self.first_name} {self.last_name}')  # Также используем first_name и last_name
         super().delete(*args, **kwargs)
 
 

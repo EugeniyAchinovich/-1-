@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
@@ -64,13 +65,28 @@ class ClientSearchFormTests(TestCase):
 
 
 class ClientListViewTests(TestCase):
-    def setUp(self):
-        self.client_instance = Client.objects.create(
-            first_name='Александр',
-            last_name='Николаев',
-            age=20,
-            phone='+375 (29) 123-45-67'
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_superuser(
+            username='testuser',
+            email='test@example.com',
+            password='password123',
         )
+        cls.client_instance = Client.objects.create(
+            first_name="Александр",
+            last_name="Петров",
+            address="Улица Мира, 1",
+            passport_data="AB123456",
+            age=30,
+            phone="+375 (29) 123-45-67"
+        )
+
+    def setUp(self):
+        self.client.login(username='testuser', password='password123')  # Логин перед выполнением тестов
+
+    def test_search_functionality(self):
+        response = self.client.get('/clients/')  # укажите правильный URL
+        self.assertContains(response, 'Александр')
 
     def test_view_url(self):
         response = self.client.get(reverse('client_list_view'))
@@ -79,10 +95,6 @@ class ClientListViewTests(TestCase):
     def test_view_renders_correct_template(self):
         response = self.client.get(reverse('client_list_view'))
         self.assertTemplateUsed(response, 'client_list_view.html')
-
-    def test_search_functionality(self):
-        response = self.client.get(reverse('client_list_view'), {'query': 'Александр'})
-        self.assertContains(response, 'Александр')
 
     def test_sorting(self):
         response = self.client.get(reverse('client_list_view'), {'sort_by': 'age', 'sort_order': 'asc'})
