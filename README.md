@@ -2,9 +2,9 @@
 Для запуска необходимо клонировать себе данный репозиторий
 
 #### Далее ввести в терминале следующие команды поочерёдно
-pip install -r requirements.txt
-cd service_center
-python manage.py runserver
+* pip install -r requirements.txt
+* cd service_center
+* python manage.py runserver
 
 После переходим по адресу http://127.0.0.1:8000/
 
