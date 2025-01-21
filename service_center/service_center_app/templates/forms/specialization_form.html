@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if specialization %}Редактировать{% else %}Создать{% endif %} специализацию</title>
+</head>
+<body>
+    <h1>{% if specialization %}Редактировать{% else %}Создать{% endif %} специализацию</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Название:</label><br>
+        <input type="text" name="name" value="{{ specialization.name|default:'' }}"><br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'specialization_list' %}">Назад</a>
+</body>
+</html>

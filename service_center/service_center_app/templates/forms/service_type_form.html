@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if service_type %}Редактировать{% else %}Создать{% endif %} тип услуги</title>
+</head>
+<body>
+    <h1>{% if service_type %}Редактировать{% else %}Создать{% endif %} тип услуги</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Название:</label><br>
+        <input type="text" name="name" value="{{ service_type.name|default:'' }}"><br>
+
+        <label>Описание:</label><br>
+        <textarea name="description">{{ service_type.description|default:'' }}</textarea><br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'service_type_list' %}">Назад</a>
+</body>
+</html>

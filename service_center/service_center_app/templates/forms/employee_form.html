@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if employee %}Редактировать{% else %}Создать{% endif %} сотрудника</title>
+</head>
+<body>
+    <h1>{% if employee %}Редактировать{% else %}Создать{% endif %} сотрудника</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Имя:</label><br>
+        <input type="text" name="first_name" value="{{ employee.first_name|default:'' }}"><br>
+
+        <label>Фамилия:</label><br>
+        <input type="text" name="last_name" value="{{ employee.last_name|default:'' }}"><br>
+
+        <label>Специализация:</label><br>
+        <select name="specialization_id">
+            {% for specialization in specializations %}
+            <option value="{{ specialization.id }}" {% if employee and employee.specialization.id == specialization.id %}selected{% endif %}>{{ specialization.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'employee_list' %}">Назад</a>
+</body>
+</html>

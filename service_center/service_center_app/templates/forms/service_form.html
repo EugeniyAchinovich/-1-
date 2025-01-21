@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if service %}Редактировать{% else %}Создать{% endif %} услугу</title>
+</head>
+<body>
+    <h1>{% if service %}Редактировать{% else %}Создать{% endif %} услугу</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Название:</label><br>
+        <input type="text" name="name" value="{{ service.name|default:'' }}"><br>
+
+        <label>Цена:</label><br>
+        <input type="text" name="price" value="{{ service.price|default:'' }}"><br>
+
+        <label>Тип услуги:</label><br>
+        <select name="service_type_id">
+            {% for service_type in service_types %}
+            <option value="{{ service_type.id }}" {% if service and service.service_type.id == service_type.id %}selected{% endif %}>{{ service_type.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'service_list' %}">Назад</a>
+</body>
+</html>

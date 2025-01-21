@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доступные услуги</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Категории услуг</h1>
+
+        <form method="GET" class="mb-4">
+            <div class="form-group">
+                <label for="service_type">Тип услуги:</label>
+                <select name="service_type" id="service_type" class="form-control">
+                    <option value="">-- Выберите тип услуги --</option>
+                    {% for type in service_types %}
+                        <option value="{{ type.id }}">{{ type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Максимальная цена:</label>
+                <input type="number" name="price" id="price" step="0.01" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Фильтровать</button>
+        </form>
+
+        <h2 class="mt-4">Список услуг</h2>
+        <ul class="list-group">
+            {% for service in services %}
+                <li class="list-group-item">
+                    <strong>{{ service.name }}</strong>: {{ service.price }} ({{ service.service_type.name }})
+                </li>
+            {% empty %}
+                <li class="list-group-item">Услуги не найдены.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Подключение Bootstrap JS и JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

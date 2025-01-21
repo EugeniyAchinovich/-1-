@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список запчастей</title>
+</head>
+<body>
+    <h1>Список запчастей</h1>
+
+    <h2>Текущая дата (UTC): {{ current_utc_date }}</h2>
+    <h2>Текущая дата (ваша тайм-зона): {{ current_user_date }}</h2>
+
+    <h2>Запчасти:</h2>
+    <ul>
+        {% for part in spare_parts %}
+            <li>
+                {{ part.name }} - {{ part.price }} руб.
+                <br>
+                Дата добавления (UTC): {{ part.utc_created_at }},
+                Дата изменения (UTC): {{ part.utc_updated_at }},
+                Дата добавления (ваша тайм-зона): {{ part.user_created_at }},
+                Дата изменения (ваша тайм-зона): {{ part.user_updated_at }}
+            </li>
+        {% empty %}
+            <li>Нет запчастей</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

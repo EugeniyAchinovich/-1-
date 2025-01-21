@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if client %}Редактировать{% else %}Создать{% endif %} клиента</title>
+</head>
+<body>
+    <h1>{% if client %}Редактировать{% else %}Создать{% endif %} клиента</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Имя:</label><br>
+        <input type="text" name="first_name" value="{{ client.first_name|default:'' }}"><br>
+
+        <label>Фамилия:</label><br>
+        <input type="text" name="last_name" value="{{ client.last_name|default:'' }}"><br>
+
+        <label>Адрес:</label><br>
+        <input type="text" name="address" value="{{ client.address|default:'' }}"><br>
+
+        <label>Паспортные данные:</label><br>
+        <input type="text" name="passport_data" value="{{ client.passport_data|default:'' }}"><br>
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'client_list' %}">Назад</a>
+</body>
+</html>

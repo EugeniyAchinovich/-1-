@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить тип запчасти{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Добавить тип запчасти</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Название</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
+{% endblock %}

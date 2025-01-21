@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Показатели</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif; /* Задаем шрифт для страницы */
+            background-color: #f4f4f4; /* Фоновый цвет */
+            margin: 0; /* Убираем отступы */
+            padding: 0; /* Убираем паддинг */
+        }
+
+        h1 {
+            text-align: center; /* Выравнивание заголовка по центру */
+            color: #333; /* Цвет текста заголовка */
+            margin: 20px 0; /* Отступы сверху и снизу */
+        }
+
+        h2 {
+            text-align: center; /* Выравнивание заголовков графиков по центру */
+            color: #555; /* Цвет текста заголовков графиков */
+            margin-top: 10px; /* Отступ сверху для заголовков графиков */
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <!-- График распределения клиентов по возрасту -->
+    <div class="chart-container">
+        <h2>Распределение клиентов по возрасту</h2>
+        <canvas id="ageDistributionChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- График распространения услуг по типам -->
+    <div class="chart-container">
+        <h2>Распространение услуг по типам</h2>
+        <canvas id="serviceDistributionChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- График количества заказов по датам -->
+    <div class="chart-container">
+        <h2>Количество заказов по датам</h2>
+        <canvas id="orderCountChart" width="400" height="200"></canvas>
+    </div>
+    <script>
+        // График распределения клиентов по возрасту
+        const ageCtx = document.getElementById('ageDistributionChart').getContext('2d');
+        const ageDistributionChart = new Chart(ageCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ age_labels|safe }},
+                datasets: [{
+                    label: 'Количество клиентов',
+                    data: {{ age_counts|safe }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // График распространения услуг
+        const serviceCtx = document.getElementById('serviceDistributionChart').getContext('2d');
+        const serviceDistributionChart = new Chart(serviceCtx, {
+            type: 'pie',
+            data: {
+                labels: {{ service_labels|safe }},
+                datasets: [{
+                    label: 'Распространение услуг',
+                    data: {{ service_counts|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // График количества заказов по датам
+        const orderCtx = document.getElementById('orderCountChart').getContext('2d');
+        const orderCountChart = new Chart(orderCtx, {
+            type: 'line',
+            data: {
+                labels: {{ order_dates|safe }},
+                datasets: [{
+                    label: 'Количество заказов',
+                    data: {{ order_counts|safe }},
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск на YouTube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        ul {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Поиск видео на YouTube</h1>
+
+    <form method="GET">
+        <input type="text" name="query" value="{{ query }}" placeholder="Поиск...">
+        <button type="submit">Поиск</button>
+    </form>
+
+    <h2>Результаты поиска</h2>
+    <ul>
+        {% for video in videos %}
+            <li>
+                <a href="https://www.youtube.com/watch?v={{ video.id.videoId }}" target="_blank">
+                    <h3>{{ video.snippet.title }}</h3>
+                    <img src="{{ video.snippet.thumbnails.default.url }}" alt="{{ video.snippet.title }}">
+                </a>
+                <p>{{ video.snippet.description }}</p>
+            </li>
+        {% empty %}
+            <li class="no-data">Видео не найдено.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

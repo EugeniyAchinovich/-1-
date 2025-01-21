@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Список специализаций{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Список специализаций</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название специализации</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for specialization in specializations %}
+        <tr>
+            <td>{{ specialization.name }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td class="text-center">Специализации не найдены.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

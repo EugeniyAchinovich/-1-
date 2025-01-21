@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if order %}Редактировать{% else %}Создать{% endif %} заказ</title>
+</head>
+<body>
+    <h1>{% if order %}Редактировать{% else %}Создать{% endif %} заказ</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Номер заказа:</label><br>
+        <input type="text" name="order_number" value="{{ order.order_number|default:'' }}"><br>
+
+        <label>Клиент:</label><br>
+        <select name="client_id">
+            {% for client in clients %}
+            <option value="{{ client.id }}" {% if order and order.client.id == client.id %}selected{% endif %}>{{ client }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Услуги:</label><br>
+        {% for service in services %}
+            <input type="checkbox" name="services" value="{{ service.id }}" {% if order and order.service.filter(id=service.id).exists %}checked{% endif %}> {{ service.name }}<br>
+        {% endfor %}
+
+        <input type="submit" value="Сохранить">
+    </form>
+    <a href="{% url 'order_list' %}">Назад</a>
+</body>
+</html>

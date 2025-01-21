@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Список ремонтных устройств{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Список ремонтных устройств</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название ремонтного устройства</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for repairdevice in repairdevices %}
+        <tr>
+            <td>{{ repairdevice.name }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td class="text-center">Ремонтные устройства не найдены.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

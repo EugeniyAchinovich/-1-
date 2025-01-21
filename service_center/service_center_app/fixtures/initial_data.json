@@ -1,0 +1,165 @@
+[
+    {
+        "model": "service_center_app.client",
+        "pk": 1,
+        "fields": {
+            "first_name": "Иван",
+            "last_name": "Иванов",
+            "address": "Улица Ленина, дом 1",
+            "passport_data": "1234567890",
+            "age": 24
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 2,
+        "fields": {
+            "first_name": "Петр",
+            "last_name": "Петров",
+            "address": "Улица Степана Разина, дом 2",
+            "passport_data": "0987654321",
+            "age": 33
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 3,
+        "fields": {
+            "first_name": "Сергей",
+            "last_name": "Сергеев",
+            "address": "Улица Пушкина, дом 3",
+            "passport_data": "1122334455",
+            "age": 45
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 4,
+        "fields": {
+            "first_name": "Анна",
+            "last_name": "Сидорова",
+            "address": "Улица Гагарина, дом 4",
+            "passport_data": "2233445566",
+            "age": 31
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 5,
+        "fields": {
+            "first_name": "Мария",
+            "last_name": "Григорьева",
+            "address": "Улица Чехова, дом 5",
+            "passport_data": "3344556677",
+            "age": 42
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 6,
+        "fields": {
+            "first_name": "Ольга",
+            "last_name": "Тимофеева",
+            "address": "Улица Морская, дом 6",
+            "passport_data": "4455667788",
+            "age": 28
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 7,
+        "fields": {
+            "first_name": "Дмитрий",
+            "last_name": "Александров",
+            "address": "Улица Кольцевая, дом 7",
+            "passport_data": "5566778899",
+            "age": 30
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 8,
+        "fields": {
+            "first_name": "Екатерина",
+            "last_name": "Николаева",
+            "address": "Улица Набережная, дом 8",
+            "passport_data": "6677889900",
+            "age": 50
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 9,
+        "fields": {
+            "first_name": "Илья",
+            "last_name": "Матвеев",
+            "address": "Улица Спортивная, дом 9",
+            "passport_data": "7788990011",
+            "age": 36
+        }
+    },
+    {
+        "model": "service_center_app.client",
+        "pk": 10,
+        "fields": {
+            "first_name": "Александр",
+            "last_name": "Федоров",
+            "address": "Улица Цветочная, дом 10",
+            "passport_data": "8899001122",
+            "age": 62
+        }
+    },
+    {
+        "model": "service_center_app.service",
+        "pk": 1,
+        "fields": {
+            "name": "Ремонт АКПП",
+            "price": 300.00,
+            "service_type": 1
+        }
+    },
+    {
+        "model": "service_center_app.service",
+        "pk": 2,
+        "fields": {
+            "name": "Гильзование двигателя",
+            "price": 500.00,
+            "service_type": 1
+        }
+    },
+    {
+        "model": "service_center_app.service",
+        "pk": 3,
+        "fields": {
+            "name": "Восстановление кузова от вмятин",
+            "price": 200.00,
+            "service_type": 1
+        }
+    },
+    {
+        "model": "service_center_app.service",
+        "pk": 4,
+        "fields": {
+            "name": "Покраска бампера",
+            "price": 300.00,
+            "service_type": 1
+        }
+    },
+    {
+        "model": "service_center_app.service",
+        "pk": 5,
+        "fields": {
+            "name": "Правка литых дисков",
+            "price": 100.00,
+            "service_type": 1
+        }
+    },
+    {
+        "model": "service_center_app.servicetype",
+        "pk": 1,
+        "fields": {
+            "name": "Кузовной ремонт",
+            "description": "Все виды кузовных работ. Геометрические, лакокрасочные и восстановительные работы."
+        }
+    }
+]

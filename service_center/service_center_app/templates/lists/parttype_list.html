@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Список типов запчастей{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Список типов запчастей</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название типа запчасти</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for parttype in parttypes %}
+        <tr>
+            <td>{{ parttype.name }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td class="text-center">Типы запчастей не найдены.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

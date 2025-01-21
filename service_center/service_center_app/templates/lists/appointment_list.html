@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Список назначений{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Список назначений</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Услуга</th>
+            <th>Работу выполняет</th>
+            <th>Дата и время</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.client }}</td>
+            <td>{{ appointment.service.name }}</td>
+            <td>{{ appointment.stylist.get_full_name }}</td>
+            <td>{{ appointment.date_time }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">Назначения не найдены.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
